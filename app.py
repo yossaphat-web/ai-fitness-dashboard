@@ -69,7 +69,7 @@ if csv_url and api_key:
                     st.stop()
                 
                 # เลือกใช้งานโมเดลตัวแรกที่ระบบอนุญาต
-                model = genai.GenerativeModel(valid_models[0])
+                model = genai.GenerativeModel('gemini-3.8-flash')
                 
                 prompt = f"""
                 คุณคือโค้ชฟิตเนสผู้เชี่ยวชาญด้านวิทยาศาสตร์การกีฬา
