@@ -61,7 +61,7 @@ if csv_url and api_key:
         if st.button("วิเคราะห์ตารางฝึกด้วย AI ตอนนี้!"):
             with st.spinner("AI กำลังวิเคราะห์ข้อมูลร่างกายย้อนหลัง 30 วันของคุณ..."):
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel('gemini-pro')
+                model = genai.GenerativeModel('gemini-1.0-pro')
                 
                 prompt = f"""
                 คุณคือโค้ชฟิตเนสผู้เชี่ยวชาญด้านวิทยาศาสตร์การกีฬา
