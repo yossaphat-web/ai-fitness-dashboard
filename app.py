@@ -61,7 +61,15 @@ if csv_url and api_key:
         if st.button("วิเคราะห์ตารางฝึกด้วย AI ตอนนี้!"):
             with st.spinner("AI กำลังวิเคราะห์ข้อมูลร่างกายย้อนหลัง 30 วันของคุณ..."):
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel('gemini-1.0-pro')
+                # ให้ระบบค้นหาโมเดลที่ API Key นี้มีสิทธิ์ใช้งานได้อัตโนมัติ
+                valid_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+                
+                if not valid_models:
+                    st.error("API Key นี้ไม่ได้รับสิทธิ์ให้ใช้งาน AI (อาจต้องตรวจสอบการตั้งค่าใน Google AI Studio)")
+                    st.stop()
+                
+                # เลือกใช้งานโมเดลตัวแรกที่ระบบอนุญาต
+                model = genai.GenerativeModel(valid_models[0])
                 
                 prompt = f"""
                 คุณคือโค้ชฟิตเนสผู้เชี่ยวชาญด้านวิทยาศาสตร์การกีฬา
